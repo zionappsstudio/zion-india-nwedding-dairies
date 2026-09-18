@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Indian Wedding Diaries | Luxury Wedding Cinema & Visual Stories</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            noir: '#080608',
+            champagne: {
+              300: '#fef08a',
+              400: '#facc15',
+              500: '#eab308',
+              600: '#ca8a04',
+            },
+            crimson: {
+              800: '#881337',
+              900: '#4c0519',
+            }
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .font-3d {
+      text-shadow: 
+        0 1px 0 #ca8a04,
+        0 2px 0 #a16207,
+        0 3px 0 #854d0e,
+        0 6px 12px rgba(0, 0, 0, 0.8),
+        0 10px 24px rgba(234, 179, 8, 0.25);
+    }
+    .card-3d {
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+    .card-3d:hover {
+      transform: translateY(-8px) rotateX(4deg) rotateY(-2deg);
+      box-shadow: 0 20px 40px -15px rgba(234, 179, 8, 0.15);
+    }
+    #sparkle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body class="bg-noir text-stone-100 font-sans antialiased selection:bg-amber-500 selection:text-black relative overflow-x-hidden pb-16 sm:pb-0">
+
+  <!-- Interactive Background Sparkle Canvas -->
+  <canvas id="sparkle-canvas"></canvas>
+
+  <!-- Ambient Glow Orbs -->
+  <div class="fixed top-0 left-1/4 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-1/4 right-1/4 w-[500px] h-[500px] bg-crimson-900/15 rounded-full blur-[160px] pointer-events-none -z-10"></div>
+
+  <!-- ================= TOP LUXURY NAVIGATION ================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-noir/80 backdrop-blur-xl border-b border-amber-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 via-amber-400 to-yellow-200 p-[1.5px] shadow-lg shadow-amber-500/20">
+          <div class="w-full h-full bg-noir rounded-full flex items-center justify-center">
+            <span class="font-serif font-bold text-amber-400 text-lg">IWD</span>
+          </div>
+        </div>
+        <div>
+          <span class="font-serif text-lg tracking-wider text-white uppercase block font-bold">Indian Wedding Diaries</span>
+          <span class="text-[9px] uppercase tracking-[0.3em] text-amber-400/80 block font-semibold">Couture Cinema & Visuals</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-8 text-xs uppercase tracking-widest font-semibold text-stone-300">
+        <a href="#services" class="hover:text-amber-400 transition-colors">Services</a>
+        <a href="#portfolio" class="hover:text-amber-400 transition-colors">Sample Works</a>
+        <a href="#calculator" class="hover:text-amber-400 transition-colors">Investment Estimator</a>
+        <a href="#vault" class="hover:text-amber-400 transition-colors">Private Vault</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button onclick="openAdminModal()" class="px-3 py-1.5 rounded-lg border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 text-xs font-semibold flex items-center gap-1.5 transition-all">
+          <i data-lucide="lock" class="w-3.5 h-3.5"></i> Admin
+        </button>
+        <a href="#calculator" class="hidden sm:inline-flex px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 text-neutral-950 font-bold text-xs uppercase tracking-wider shadow-lg shadow-amber-500/25 hover:scale-105 transition-all">
+          Book Dates
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 pt-20">
+    <!-- ================= HERO SECTION ================= -->
+    <section class="min-h-[88vh] flex items-center justify-center px-4 sm:px-6 relative overflow-hidden py-16">
+      <div class="max-w-5xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold tracking-widest uppercase mb-6 shadow-inner">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400 animate-spin"></i>
+          Capturing Royal Legacies Across India & Beyond
+        </div>
+
+        <h1 class="font-serif text-4xl sm:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-yellow-100 via-amber-200 to-amber-500 font-3d leading-[1.1] mb-6">
+          Every Glance.<br />Every Ritual. Forever.
+        </h1>
+
+        <p class="text-stone-300 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed font-light mb-10">
+          Cinematic visual storytelling for grand Indian celebrations. From intimate Haldi laughter to palace varmalas, we frame your family heritage in timeless elegance.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#calculator" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 text-neutral-950 font-bold text-xs uppercase tracking-widest shadow-xl shadow-amber-500/30 hover:scale-105 transition-transform flex items-center justify-center gap-2">
+            <i data-lucide="calculator" class="w-4 h-4"></i> Get Instant Quote
+          </a>
+          <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-full bg-stone-900/80 border border-amber-500/30 text-amber-300 font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors flex items-center justify-center gap-2">
+            <i data-lucide="film" class="w-4 h-4"></i> View Sample Works
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES SECTION ================= -->
+    <section id="services" class="py-20 bg-stone-950/70 border-t border-stone-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-bold uppercase tracking-[0.3em] text-amber-400">Our Ceremonial Coverage</span>
+          <h2 class="font-serif text-3xl sm:text-5xl font-extrabold text-white mt-2">Services Crafted for Royal Celebrations</h2>
+          <p class="text-stone-400 text-xs sm:text-sm mt-3">Specialized multi-camera setups, high-speed cinema optics, and aerial drone cinematography tailored to individual Indian customs.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="card-3d p-6 rounded-2xl bg-stone-900/60 border border-amber-500/20 backdrop-blur-md">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+              <i data-lucide="gem" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-white mb-2">Royal Wedding & Varmala</h3>
+            <p class="text-stone-400 text-xs leading-relaxed">Multi-angle cinema coverage, slow-motion Jai Mala captures, stage lighting, and candid family portraiture.</p>
+          </div>
+
+          <div class="card-3d p-6 rounded-2xl bg-stone-900/60 border border-amber-500/20 backdrop-blur-md">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+              <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-white mb-2">Pre & Post-Wedding Shoots</h3>
+            <p class="text-stone-400 text-xs leading-relaxed">Editorial concept stories at heritage forts, coastal sanctuaries, or destination resort landscapes with aerial drones.</p>
+          </div>
+
+          <div class="card-3d p-6 rounded-2xl bg-stone-900/60 border border-amber-500/20 backdrop-blur-md">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+              <i data-lucide="sun" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-white mb-2">Haldi, Mehendi & Sangeet</h3>
+            <p class="text-stone-400 text-xs leading-relaxed">High-energy stage performances, vibrant color grading for turmeric splashes, and candid guest interactions.</p>
+          </div>
+
+          <div class="card-3d p-6 rounded-2xl bg-stone-900/60 border border-amber-500/20 backdrop-blur-md">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+              <i data-lucide="sparkle" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-white mb-2">Engagement & Roka</h3>
+            <p class="text-stone-400 text-xs leading-relaxed">Formal ring exchanges, intimate family dinners, blessing rituals, and elegant portrait sessions.</p>
+          </div>
+
+          <div class="card-3d p-6 rounded-2xl bg-stone-900/60 border border-amber-500/20 backdrop-blur-md">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+              <i data-lucide="baby" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-white mb-2">Baby Shower & Godh Bharai</h3>
+            <p class="text-stone-400 text-xs leading-relaxed">Maternity grace, traditional Seemantham/Godh Bharai blessings, mother-child intimacy, and celebration themes.</p>
+          </div>
+
+          <div class="card-3d p-6 rounded-2xl bg-stone-900/60 border border-amber-500/20 backdrop-blur-md">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+              <i data-lucide="film" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-white mb-2">Same-Day Reception Teaser</h3>
+            <p class="text-stone-400 text-xs leading-relaxed">On-site rapid video editors projecting a 3-minute cinematic highlights film directly onto banquet LED walls.</p>
+          </div>
+
+          <div class="card-3d p-6 rounded-2xl bg-stone-900/60 border border-amber-500/20 backdrop-blur-md">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+              <i data-lucide="plane" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-white mb-2">Destination Wedding Unit</h3>
+            <p class="text-stone-400 text-xs leading-relaxed">Dedicated travel squad across Udaipur, Jaipur, Goa, Kerala, Dubai, or Bali with unified itinerary management.</p>
+          </div>
+
+          <div class="card-3d p-6 rounded-2xl bg-stone-900/60 border border-amber-500/20 backdrop-blur-md">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+              <i data-lucide="book-open" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-white mb-2">Handcrafted Leather Albums</h3>
+            <p class="text-stone-400 text-xs leading-relaxed">Imported Italian textured leather covers, velvet sleeves, metallic pages, and bespoke calligraphic embossing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SAMPLE WORKS GALLERY ================= -->
+    <section id="portfolio" class="py-20 border-t border-stone-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-[0.3em] text-amber-400">Our Visual Diaries</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-extrabold text-white mt-1">Featured Royal Stories</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="filterGallery('All')" class="gal-tab active px-4 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-black">All</button>
+            <button onclick="filterGallery('Wedding')" class="gal-tab px-4 py-1.5 rounded-full text-xs font-bold bg-stone-900 border border-stone-800 text-stone-300">Wedding</button>
+            <button onclick="filterGallery('Pre-Wedding')" class="gal-tab px-4 py-1.5 rounded-full text-xs font-bold bg-stone-900 border border-stone-800 text-stone-300">Pre-Wedding</button>
+            <button onclick="filterGallery('Sangeet')" class="gal-tab px-4 py-1.5 rounded-full text-xs font-bold bg-stone-900 border border-stone-800 text-stone-300">Sangeet</button>
+          </div>
+        </div>
+
+        <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+    </section>
+
+    <!-- ================= PRIVATE CLIENT PROOFING VAULT ================= -->
+    <section id="vault" class="py-20 bg-stone-950/80 border-t border-stone-800">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="rounded-3xl border border-amber-500/30 bg-gradient-to-b from-stone-900/90 to-noir p-8 sm:p-12 shadow-2xl relative text-center">
+          <div class="w-14 h-14 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-400 flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="key-round" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xs uppercase font-bold tracking-[0.3em] text-amber-400">Exclusive Client Privilege</span>
+          <h2 class="font-serif text-2xl sm:text-4xl font-bold text-white mt-1">Private Wedding Proofing Vault</h2>
+          <p class="text-stone-400 text-xs sm:text-sm max-w-xl mx-auto mt-2 mb-6">
+            Enter your private family passcode to access ultra-high-resolution RAW selections, review cinematic color drafts, and curate album layouts.
+          </p>
+          <div class="max-w-md mx-auto flex items-center gap-2">
+            <input type="password" id="vault-passcode" placeholder="Enter Couple PIN (e.g. 2026)" class="flex-1 bg-noir border border-stone-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 font-mono" />
+            <button onclick="unlockVault()" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold text-xs uppercase tracking-wider transition-all">Unlock</button>
+          </div>
+          <p id="vault-msg" class="text-xs text-amber-400 mt-3 hidden"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= INTERACTIVE QUOTATION CALCULATOR ================= -->
+    <section id="calculator" class="py-20 border-t border-stone-800">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12">
+          <span class="text-xs font-bold uppercase tracking-[0.3em] text-amber-400">Tailored Investment</span>
+          <h2 class="font-serif text-3xl sm:text-5xl font-extrabold text-white mt-1">Instant Ceremonial Quotation</h2>
+          <p class="text-stone-400 text-xs sm:text-sm mt-2">Select your days, events, and cinematic deliverables to estimate your custom package.</p>
+        </div>
+
+        <div class="rounded-3xl border border-amber-500/25 bg-stone-900/60 p-6 sm:p-10 shadow-2xl space-y-8 backdrop-blur-md">
+          <!-- Step 1: Duration -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">1. Number of Celebration Days</label>
+            <div class="grid grid-cols-3 gap-3">
+              <button type="button" onclick="setDays(1, this)" class="calc-day px-4 py-3 rounded-xl border border-stone-800 bg-stone-950 text-stone-300 text-xs font-bold text-center hover:border-amber-500">1 Day (Grand Wedding)</button>
+              <button type="button" onclick="setDays(2, this)" class="calc-day active px-4 py-3 rounded-xl border border-amber-500 bg-amber-500/20 text-white text-xs font-bold text-center">2 Days (Haldi + Wedding)</button>
+              <button type="button" onclick="setDays(3, this)" class="calc-day px-4 py-3 rounded-xl border border-stone-800 bg-stone-950 text-stone-300 text-xs font-bold text-center hover:border-amber-500">3+ Days (Complete Palace Affair)</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Events Checklist -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">2. Ceremonies to Cover (Select All Applicable)</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+              <label class="p-3 bg-stone-950 border border-stone-800 rounded-xl flex items-center gap-2.5 cursor-pointer">
+                <input type="checkbox" checked onchange="calcTotal()" class="calc-addon" data-cost="25000">
+                <span>Engagement / Roka</span>
+              </label>
+              <label class="p-3 bg-stone-950 border border-stone-800 rounded-xl flex items-center gap-2.5 cursor-pointer">
+                <input type="checkbox" checked onchange="calcTotal()" class="calc-addon" data-cost="35000">
+                <span>Pre-Wedding Story Shoot</span>
+              </label>
+              <label class="p-3 bg-stone-950 border border-stone-800 rounded-xl flex items-center gap-2.5 cursor-pointer">
+                <input type="checkbox" checked onchange="calcTotal()" class="calc-addon" data-cost="30000">
+                <span>Mehendi & Sangeet</span>
+              </label>
+              <label class="p-3 bg-stone-950 border border-stone-800 rounded-xl flex items-center gap-2.5 cursor-pointer">
+                <input type="checkbox" checked onchange="calcTotal()" class="calc-addon" data-cost="20000">
+                <span>Haldi & Phoolon Ki Holi</span>
+              </label>
+              <label class="p-3 bg-stone-950 border border-stone-800 rounded-xl flex items-center gap-2.5 cursor-pointer">
+                <input type="checkbox" checked onchange="calcTotal()" class="calc-addon" data-cost="60000">
+                <span>Varmala & Pheras</span>
+              </label>
+              <label class="p-3 bg-stone-950 border border-stone-800 rounded-xl flex items-center gap-2.5 cursor-pointer">
+                <input type="checkbox" onchange="calcTotal()" class="calc-addon" data-cost="25000">
+                <span>Baby Shower / Seemantham</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 3: Production Tier -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">3. Cinematography & Equipment Setup</label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <button type="button" onclick="setGear('classic', 40000, this)" class="calc-gear px-4 py-3 rounded-xl border border-stone-800 bg-stone-950 text-stone-400 text-xs font-bold text-left hover:border-amber-500">
+                Classic 2-Camera Setup (Traditional + Candid)
+              </button>
+              <button type="button" onclick="setGear('cinema', 85000, this)" class="calc-gear active px-4 py-3 rounded-xl border border-amber-500 bg-amber-500/20 text-white text-xs font-bold text-left">
+                Cinema Crew + 4K Drone + Gimbal Director
+              </button>
+              <button type="button" onclick="setGear('magnum', 150000, this)" class="calc-gear px-4 py-3 rounded-xl border border-stone-800 bg-stone-950 text-stone-400 text-xs font-bold text-left hover:border-amber-500">
+                Palace Magnum: 6 Shooters + Crane + Live LED Feed
+              </button>
+            </div>
+          </div>
+
+          <!-- Total Calculation Display with Dynamic WhatsApp CTA -->
+          <div class="p-6 rounded-2xl bg-stone-950 border border-amber-500/40 flex flex-col lg:flex-row items-center justify-between gap-5">
+            <div>
+              <span class="text-[11px] uppercase tracking-widest text-amber-400/80 font-bold block">Estimated Investment</span>
+              <div id="quote-price" class="text-3xl sm:text-4xl font-black text-white font-serif tracking-tight mt-1">₹2,55,000</div>
+              <span class="text-[11px] text-stone-400 block mt-0.5">Inclusive of color-graded 4K master film, teaser, and high-res stills.</span>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
+              <button onclick="prefillBooking()" class="px-5 py-3.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-amber-300 font-bold text-xs uppercase tracking-wider border border-amber-500/30 transition-colors text-center">
+                Fill Web Form
+              </button>
+              <a id="wa-calc-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/40 flex items-center justify-center gap-2 transition-transform hover:scale-105">
+                <i data-lucide="message-circle" class="w-4 h-4 fill-white"></i>
+                <span>Lock via WhatsApp &rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LEAD INTAKE ================= -->
+    <section id="contact" class="py-20 bg-stone-950/90 border-t border-stone-800">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10">
+          <span class="text-xs font-bold uppercase tracking-[0.3em] text-amber-400">Inquire Availability</span>
+          <h2 class="font-serif text-3xl sm:text-5xl font-extrabold text-white mt-1">Reserve Your Wedding Dates</h2>
+          <p class="text-stone-400 text-xs sm:text-sm mt-2">We accept a maximum of 25 weddings per calendar year to preserve our signature cinema standard.</p>
+        </div>
+
+        <form onsubmit="event.preventDefault(); alert('Namaste! Your booking request has been received. Our lead director will call you within 12 hours.'); this.reset();" class="space-y-4 bg-stone-900/60 p-6 sm:p-8 rounded-3xl border border-stone-800">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-stone-400 mb-1">Bride & Groom / Client Name *</label>
+              <input type="text" required placeholder="e.g. Radhika & Siddharth" class="w-full bg-noir border border-stone-700 rounded-xl px-4 py-3 text-xs text-white focus:border-amber-400 outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-stone-400 mb-1">WhatsApp Contact *</label>
+              <input type="tel" required placeholder="+91 98765 43210" class="w-full bg-noir border border-stone-700 rounded-xl px-4 py-3 text-xs text-white focus:border-amber-400 outline-none" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-stone-400 mb-1">Wedding / Celebration Date *</label>
+              <input type="date" required class="w-full bg-noir border border-stone-700 rounded-xl px-4 py-3 text-xs text-white focus:border-amber-400 outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-stone-400 mb-1">Destination City / Venue *</label>
+              <input type="text" required placeholder="e.g. Umaid Bhawan, Jodhpur / Goa" class="w-full bg-noir border border-stone-700 rounded-xl px-4 py-3 text-xs text-white focus:border-amber-400 outline-none" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold uppercase text-stone-400 mb-1">Ceremonies & Vision Notes</label>
+            <textarea id="booking-notes" rows="3" placeholder="Tell us about your event scale, number of guests, and any specific traditions..." class="w-full bg-noir border border-stone-700 rounded-xl px-4 py-3 text-xs text-white focus:border-amber-400 outline-none"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 text-neutral-950 font-bold text-xs uppercase tracking-widest hover:scale-[1.01] transition-transform">
+            Send Formal Inquiry
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FLOATING WHATSAPP BUTTON ================= -->
+  <a id="wa-floating-btn" href="https://wa.me/919381217686?text=Namaste!%20I'd%20like%20to%20inquire%20about%20wedding%20photography%20dates%20with%20Indian%20Wedding%20Diaries." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 px-4 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-2.5 shadow-2xl shadow-emerald-950/80 border border-emerald-400/30 transition-transform hover:scale-105" title="Chat on WhatsApp">
+    <i data-lucide="message-circle" class="w-4 h-4 fill-white"></i>
+    <span class="tracking-wide">Direct WhatsApp Inquiry</span>
+  </a>
+
+  <!-- ================= ADMIN PORTAL ================= -->
+  <div id="admin-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-stone-900 border border-amber-500/30 rounded-3xl p-6 sm:p-8 max-w-lg w-full relative shadow-2xl">
+      <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-stone-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-2 mb-2 text-amber-400">
+        <i data-lucide="shield" class="w-5 h-5"></i>
+        <span class="text-xs font-bold uppercase tracking-widest">Admin Control Panel</span>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-white mb-1">Publish Sample Work</h3>
+      <p class="text-xs text-stone-400 mb-6">Add new photography stories or video links directly into the public portfolio gallery.</p>
+
+      <form id="admin-form" onsubmit="handleAdminUpload(event)" class="space-y-3.5 text-xs">
+        <div>
+          <label class="block text-stone-400 mb-1">Couple / Story Title</label>
+          <input type="text" id="work-title" required placeholder="e.g. Kiara & Sid's Royal Vows" class="w-full bg-noir border border-stone-700 rounded-xl p-3 text-white focus:border-amber-400 outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-stone-400 mb-1">Category</label>
+            <select id="work-category" class="w-full bg-noir border border-stone-700 rounded-xl p-3 text-white focus:border-amber-400 outline-none">
+              <option value="Wedding">Wedding</option>
+              <option value="Pre-Wedding">Pre-Wedding</option>
+              <option value="Sangeet">Sangeet / Haldi</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-stone-400 mb-1">Destination / City</label>
+            <input type="text" id="work-location" required placeholder="e.g. Udaipur, Rajasthan" class="w-full bg-noir border border-stone-700 rounded-xl p-3 text-white focus:border-amber-400 outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-stone-400 mb-1">Photo Image URL</label>
+          <input type="url" id="work-img" required placeholder="https://images.unsplash.com/photo-..." class="w-full bg-noir border border-stone-700 rounded-xl p-3 text-white focus:border-amber-400 outline-none" />
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold uppercase tracking-wider text-xs mt-2 transition-colors">
+          Publish to Live Website
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-12 border-t border-stone-800 bg-noir text-center text-xs text-stone-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="font-serif font-bold text-amber-400 text-sm">Indian Wedding Diaries</div>
+      <p>&copy; 2026 Indian Wedding Diaries. Couture Wedding Cinema & Photography. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    lucide.createIcons();
+
+    // 1. Sparkle Particle Engine
+    const canvas = document.getElementById('sparkle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Sparkle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.8;
+        this.speedY = Math.random() * -0.4 - 0.1;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.alpha = Math.random() * 0.8 + 0.2;
+        this.decay = Math.random() * 0.005 + 0.002;
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.alpha -= this.decay;
+        if (this.alpha <= 0 || this.y < 0) {
+          this.reset();
+          this.y = canvas.height + 5;
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(250, 204, 21, ${this.alpha})`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#facc15';
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 55; i++) { particles.push(new Sparkle()); }
+
+    function animateSparkles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateSparkles);
+    }
+    animateSparkles();
+
+    // 2. Sample Works Dynamic Store
+    let sampleWorks = [
+      {
+        title: "Ananya & Kabir's Palace Vows",
+        category: "Wedding",
+        location: "City Palace, Udaipur",
+        img: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Golden Hour Pre-Wedding",
+        category: "Pre-Wedding",
+        location: "Sam Sand Dunes, Jaisalmer",
+        img: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Vibrant Haldi Celebrations",
+        category: "Sangeet",
+        location: "Alila Diwa, Goa",
+        img: "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    let currentFilter = 'All';
+
+    function renderGallery() {
+      const grid = document.getElementById('gallery-grid');
+      const filtered = currentFilter === 'All' ? sampleWorks : sampleWorks.filter(w => w.category === currentFilter);
+
+      grid.innerHTML = filtered.map(item => `
+        <div class="card-3d rounded-2xl overflow-hidden bg-stone-900 border border-stone-800 flex flex-col group">
+          <div class="h-64 sm:h-72 overflow-hidden relative">
+            <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+            <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-amber-500/30 text-[10px] font-bold text-amber-300 uppercase">
+              ${item.category}
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif font-bold text-white text-base group-hover:text-amber-300 transition-colors">${item.title}</h3>
+              <p class="text-xs text-stone-400 mt-1 flex items-center gap-1.5">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-500"></i> ${item.location}
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stone-800 flex items-center justify-between text-xs">
+              <span class="text-amber-400/80 font-bold">Cinema & Photos</span>
+              <button onclick="alert('Viewing 4K teaser for: ${item.title}')" class="text-stone-300 hover:text-white underline">Watch Teaser</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function filterGallery(category) {
+      currentFilter = category;
+      document.querySelectorAll('.gal-tab').forEach(tab => {
+        if (tab.textContent.trim() === category) {
+          tab.className = "gal-tab active px-4 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-black";
+        } else {
+          tab.className = "gal-tab px-4 py-1.5 rounded-full text-xs font-bold bg-stone-900 border border-stone-800 text-stone-300";
+        }
+      });
+      renderGallery();
+    }
+
+    // 3. Admin Upload Logic
+    function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
+    function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
+
+    function handleAdminUpload(e) {
+      e.preventDefault();
+      const newWork = {
+        title: document.getElementById('work-title').value,
+        category: document.getElementById('work-category').value,
+        location: document.getElementById('work-location').value,
+        img: document.getElementById('work-img').value
+      };
+      sampleWorks.unshift(newWork);
+      renderGallery();
+      closeAdminModal();
+      document.getElementById('admin-form').reset();
+      alert('Sample work published to the live portfolio gallery!');
+    }
+
+    // 4. Quotation Calculator with Dynamic WhatsApp Sync
+    let calcState = {
+      days: 2,
+      gearCost: 85000,
+    };
+
+    function setDays(days, btn) {
+      calcState.days = days;
+      document.querySelectorAll('.calc-day').forEach(b => {
+        b.className = "calc-day px-4 py-3 rounded-xl border border-stone-800 bg-stone-950 text-stone-300 text-xs font-bold text-center hover:border-amber-500";
+      });
+      btn.className = "calc-day active px-4 py-3 rounded-xl border border-amber-500 bg-amber-500/20 text-white text-xs font-bold text-center";
+      calcTotal();
+    }
+
+    function setGear(type, cost, btn) {
+      calcState.gearCost = cost;
+      document.querySelectorAll('.calc-gear').forEach(b => {
+        b.className = "calc-gear px-4 py-3 rounded-xl border border-stone-800 bg-stone-950 text-stone-400 text-xs font-bold text-left hover:border-amber-500";
+      });
+      btn.className = "calc-gear active px-4 py-3 rounded-xl border border-amber-500 bg-amber-500/20 text-white text-xs font-bold text-left";
+      calcTotal();
+    }
+
+    function calcTotal() {
+      let addonTotal = 0;
+      document.querySelectorAll('.calc-addon:checked').forEach(cb => {
+        addonTotal += parseInt(cb.getAttribute('data-cost'));
+      });
+
+      const dayMultiplier = calcState.days === 1 ? 1 : calcState.days === 2 ? 1.4 : 1.8;
+      const total = Math.round((addonTotal + calcState.gearCost) * dayMultiplier);
+
+      document.getElementById('quote-price').textContent = `₹${total.toLocaleString('en-IN')}`;
+
+      // Update WhatsApp CTAs dynamically
+      const waCalcBtn = document.getElementById('wa-calc-btn');
+      const waFloatBtn = document.getElementById('wa-floating-btn');
+      const waMsg = encodeURIComponent(
+        `Namaste Indian Wedding Diaries! I calculated a custom wedding package on your website:\n` +
+        `• Duration: ${calcState.days} Day(s)\n` +
+        `• Estimated Investment: ₹${total.toLocaleString('en-IN')}\n` +
+        `I would like to check availability for our celebration dates.`
+      );
+
+      const waUrl = `https://wa.me/919381217686?text=${waMsg}`;
+      if (waCalcBtn) waCalcBtn.href = waUrl;
+      if (waFloatBtn) waFloatBtn.href = waUrl;
+    }
+
+    function prefillBooking() {
+      const price = document.getElementById('quote-price').textContent;
+      const notes = document.getElementById('booking-notes');
+      notes.value = `Selected Estimate: ${price} (${calcState.days} Days coverage). Looking to discuss customized timeline and cinema deliverables.`;
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 5. Private Vault Check
+    function unlockVault() {
+      const pin = document.getElementById('vault-passcode').value;
+      const msg = document.getElementById('vault-msg');
+      msg.classList.remove('hidden');
+      if (pin === '2026') {
+        msg.textContent = 'Passcode accepted! Redirecting to ultra-res selection server...';
+        msg.className = 'text-xs text-emerald-400 mt-3';
+      } else {
+        msg.textContent = 'Invalid family access PIN. Please check your wedding invitation card.';
+        msg.className = 'text-xs text-rose-400 mt-3';
+      }
+    }
+
+    // Initial Trigger
+    renderGallery();
+    calcTotal();
+  </script>
+</body>
+</html>
